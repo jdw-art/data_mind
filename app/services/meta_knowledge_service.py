@@ -158,13 +158,15 @@ class MetaKnowledgeService:
         column2sync: dict[str, bool] = {}
         for table in meta_config.tables:
             for column in table.columns:
+                # 字段 id 要和 ColumnInfo.id 的拼法保持一致
                 column2sync[f"{table.name}.{column.name}"] = column.sync
 
         value_infos: list[ValueInfo] = []
         for column_info in column_infos:
+            # 根据字段 id 判断该字段是否需要同步取值
             sync = column2sync[column_info.id]
             if sync:
-                # 这里拿的是字段真实值全集，不再是第 8 章里的少量 examples
+                # 从数仓查询该字段的 distinct 真实值，作为全文索引的数据来源
                 current_column_values = (
                     await self.dw_mysql_repository.get_column_values(
                         column_info.table_id, column_info.name, 100000
@@ -172,14 +174,18 @@ class MetaKnowledgeService:
                 )
                 current_values_infos = [
                     ValueInfo(
+                        # 字段 id + 字段值，组成一条值记录的唯一 id
                         id=f"{column_info.id}.{current_column_value}",
+                        # 真正参与 ES 全文检索的文本
                         value=current_column_value,
+                        # 记录这个值属于哪个字段，方便命中后反查字段上下文
                         column_id=column_info.id,
                     )
                     for current_column_value in current_column_values
                 ]
                 value_infos.extend(current_values_infos)
 
+        # Repository 负责把 ValueInfo 转成 ES bulk 写入格式
         await self.value_es_repository.index(value_infos)
 
     async def _save_metrics_to_meta_db(
@@ -192,6 +198,7 @@ class MetaKnowledgeService:
         for metric in meta_config.metrics:
             # MetricInfo 表达指标本身，当前直接用指标名作为稳定业务 id
             metric_info = MetricInfo(
+                # 当前实现里直接用指标名作为稳定 ID
                 id=metric.name,
                 name=metric.name,
                 description=metric.description,

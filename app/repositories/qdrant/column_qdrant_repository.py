@@ -5,6 +5,13 @@
 
 Service 层负责决定一个字段要拆成哪些 point
 Repository 只关心集合存在和向量点如何稳定落库
+
+中间结构 points
+  -> 抽出 embedding_texts 批量做向量化
+  -> 得到 embeddings
+  -> 再和 ids / payloads 按相同顺序拼回完整 point
+  -> PointStruct
+  -> Qdrant
 """
 
 from qdrant_client import AsyncQdrantClient
@@ -29,7 +36,10 @@ class ColumnQdrantRepository:
             await self.client.create_collection(
                 collection_name=self.collection_name,
                 vectors_config=VectorParams(
-                    size=app_config.qdrant.embedding_size, distance=Distance.COSINE
+                    # collection 的向量维度必须和 Embedding 输出维度一致
+                    size=app_config.qdrant.embedding_size,
+                    # 字段语义召回通常用余弦距离比较文本向量相似度
+                    distance=Distance.COSINE
                 ),
             )
 
@@ -45,6 +55,7 @@ class ColumnQdrantRepository:
             PointStruct(id=id, vector=embedding, payload=payload)
             for id, embedding, payload in zip(ids, embeddings, payloads)
         ]
+        # 按相同下标把 id、向量、payload 重新拼回一个 point
         for i in range(0, len(points), batch_size):
             await self.client.upsert(
                 collection_name=self.collection_name, points=points[i : i + batch_size]

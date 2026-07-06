@@ -20,12 +20,17 @@ class ValueESRepository:
     index_name = "value_index"
     # value 字段使用 IK 分词，这样地区 会员等级 品类等中文值才能按全文方式检索
     index_mappings = {
+        # 关闭动态映射，避免写入时偷偷生成不可控字段
         "dynamic": False,
         "properties": {
+            # 唯一标识只需要精确匹配，不需要分词
             "id": {"type": "keyword"},
             "value": {
+                # 真实业务值要支持全文检索，所以使用 text
                 "type": "text",
+                # 写入时使用中文分词器建立倒排索引
                 "analyzer": "ik_max_word",
+                # 查询时使用同一套分词逻辑，提高匹配稳定性
                 "search_analyzer": "ik_max_word",
             },
             "column_id": {"type": "keyword"},
@@ -49,12 +54,14 @@ class ValueESRepository:
 
         for i in range(0, len(value_infos), batch_size):
             batch_value_infos = value_infos[i : i + batch_size]
+            # ES bulk 需要“操作描述 + 文档内容”交替排列
             batch_operations = []
             for value_info in batch_value_infos:
-                # 用 ValueInfo.id 作为文档 id，这样重复构建时会覆盖同一条值记录
+                # 先告诉 ES：下一条文档要 index 到哪个索引、使用哪个 _id
                 batch_operations.append(
                     {"index": {"_index": self.index_name, "_id": value_info.id}}
                 )
+                # 再追加真正的文档内容
                 batch_operations.append(asdict(value_info))
             await self.client.bulk(operations=batch_operations)
 
