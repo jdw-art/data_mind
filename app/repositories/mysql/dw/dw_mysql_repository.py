@@ -16,7 +16,7 @@ class DWMySQLRepository:
     def __init__(self, session: AsyncSession):
         self.session = session
 
-    async def get_cloumn_types(self, table_name: str) -> dict[str, str]:
+    async def get_column_types(self, table_name: str) -> dict[str, str]:
         """查询整张表的字段类型，作为 ColumnInfo.type 的真实来源"""
         sql = f"show columns from {table_name}"
         result = await self.session.execute(sql)

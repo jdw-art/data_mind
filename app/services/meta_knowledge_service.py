@@ -92,6 +92,7 @@ class MetaKnowledgeService:
                 )
                 column_infos.append(column_info)
 
+        # 批量写入 Meta MySQL
         async with self.meta_mysql_repository.session.begin():
             self.meta_mysql_repository.save_table_infos(table_infos)
             self.meta_mysql_repository.save_column_infos(column_infos)
