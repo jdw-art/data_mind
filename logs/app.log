@@ -8,3 +8,12 @@
 2026-07-07 23:20:22.583 | INFO     | request_id - 1 | app.agent.nodes.extract_keywords:extract_keywords:47 - 抽取关键词：['统计', '华北地区', '统计华北地区的销售总额', '销售总额']
 2026-07-07 23:20:24.880 | INFO     | request_id - 1 | app.agent.nodes.recall_value:recall_value:62 - 检索到字段取值：['dim_region.region_name.华北']
 2026-07-07 23:20:33.086 | INFO     | request_id - 1 | app.agent.nodes.recall_metric:recall_metric:65 - 检索到指标信息：['GMV', 'AOV']
+2026-07-08 00:14:39.662 | INFO     | request_id - 1 | app.agent.nodes.extract_keywords:extract_keywords:47 - 抽取关键词：['统计', '销售总额', '统计华北地区的销售总额', '华北地区']
+2026-07-08 00:14:42.315 | INFO     | request_id - 1 | app.agent.nodes.recall_value:recall_value:62 - 检索到字段取值：['dim_region.region_name.华北']
+2026-07-08 00:14:44.352 | INFO     | request_id - 1 | app.agent.nodes.recall_metric:recall_metric:65 - 检索到指标信息：['GMV', 'AOV']
+2026-07-08 00:14:46.000 | ERROR    | request_id - 1 | app.agent.nodes.merge_retrieved_info:merge_retrieved_info:156 - 合并召回信息 failed: 'retrieved_column_infos'
+2026-07-08 00:16:50.022 | INFO     | request_id - 1 | app.agent.nodes.extract_keywords:extract_keywords:47 - 抽取关键词：['统计华北地区的销售总额', '华北地区', '销售总额', '统计']
+2026-07-08 00:16:53.090 | INFO     | request_id - 1 | app.agent.nodes.recall_value:recall_value:62 - 检索到字段取值：['dim_region.region_name.华北']
+2026-07-08 00:16:53.291 | INFO     | request_id - 1 | app.agent.nodes.recall_metric:recall_metric:65 - 检索到指标信息：['GMV', 'AOV']
+2026-07-08 00:16:53.450 | INFO     | request_id - 1 | app.agent.nodes.merge_retrieved_info:merge_retrieved_info:142 - 合并后的表信息：['dim_region', 'fact_order']
+2026-07-08 00:16:53.451 | INFO     | request_id - 1 | app.agent.nodes.merge_retrieved_info:merge_retrieved_info:145 - 合并后的指标信息：['GMV', 'AOV']

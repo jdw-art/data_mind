@@ -29,3 +29,5 @@ class DataAgentContext(TypedDict):
     metric_qdrant_repository: MetricQdrantRepository
     # 字段取值仓储，负责从 Elasticsearch 检索真实字段值
     value_es_repository: ValueESRepository
+    # 元数据库仓储，合并阶段用它按 id 补齐字段、表、主外键信息
+    meta_mysql_repository: MetaMySQLRepository
