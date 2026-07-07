@@ -17,4 +17,8 @@ class DataAgentState(TypedDict):
     """一次问数联路中的核心状态"""
 
     query: str  # 用户输入的查询
+    keywords: list[str]  # 从用户查询中提取的关键词
+    retrived_column_infos: list[ColumnInfo]  # 从字段值全文索引中召回的字段信息
+    retrived_metric_infos: list[MetricInfo]  # 从指标值全文索引中召回的指标信息
+    retrived_value_infos: list[ValueInfo]  # 从值值全文索引中召回的值信息
     error: str  # 校验SQL时出现的错误信息复制错误已复制

@@ -1,0 +1,10 @@
+2026-07-07 01:37:24.342 | INFO     | request_id - 1 | app.agent.nodes.extract_keywords:extract_keywords:47 - 抽取关键词：['华北地区', '统计', '销售总额', '统计华北地区的销售总额']
+2026-07-07 01:37:42.825 | INFO     | request_id - 1 | app.agent.nodes.extract_keywords:extract_keywords:47 - 抽取关键词：['华北地区', '销售总额', '统计华北地区的销售总额', '统计']
+2026-07-07 23:14:07.305 | INFO     | request_id - 1 | app.agent.nodes.extract_keywords:extract_keywords:47 - 抽取关键词：['销售总额', '华北地区', '统计华北地区的销售总额', '统计']
+2026-07-07 23:14:07.306 | ERROR    | request_id - 1 | app.agent.nodes.recall_column:recall_column:69 - 召回字段信息 failed: [Errno 2] No such file or directory: '/Users/jacob/GitProject/data_mind/prompts/extent_keywords_for_column_recall.prompt'
+2026-07-07 23:14:07.306 | ERROR    | request_id - 1 | app.agent.nodes.recall_metric:recall_metric:69 - 召回指标信息 failed: [Errno 2] No such file or directory: '/Users/jacob/GitProject/data_mind/prompts/extent_keywords_for_metric_recall.prompt'
+2026-07-07 23:16:20.755 | INFO     | request_id - 1 | app.agent.nodes.extract_keywords:extract_keywords:47 - 抽取关键词：['华北地区', '统计', '统计华北地区的销售总额', '销售总额']
+2026-07-07 23:16:24.302 | ERROR    | request_id - 1 | app.agent.nodes.recall_value:recall_value:66 - 召回字段取值 failed: BadRequestError(400, 'media_type_header_exception', 'Invalid media-type value on headers [Content-Type, Accept]', Accept version must be either version 8 or 7, but found 9. Accept=application/vnd.elasticsearch+json; compatible-with=9)
+2026-07-07 23:20:22.583 | INFO     | request_id - 1 | app.agent.nodes.extract_keywords:extract_keywords:47 - 抽取关键词：['统计', '华北地区', '统计华北地区的销售总额', '销售总额']
+2026-07-07 23:20:24.880 | INFO     | request_id - 1 | app.agent.nodes.recall_value:recall_value:62 - 检索到字段取值：['dim_region.region_name.华北']
+2026-07-07 23:20:33.086 | INFO     | request_id - 1 | app.agent.nodes.recall_metric:recall_metric:65 - 检索到指标信息：['GMV', 'AOV']
