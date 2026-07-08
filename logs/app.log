@@ -42,3 +42,15 @@ INNER JOIN dim_region AS r
 WHERE r.region_name = '华北';
 2026-07-08 23:41:19.941 | INFO     | request_id - 1 | app.agent.nodes.validate_sql:validate_sql:35 - SQL语法正确
 2026-07-08 23:41:19.946 | INFO     | request_id - 1 | app.agent.nodes.run_sql:run_sql:29 - SQL执行结果：[{'销售总额': 41099.5}]
+2026-07-09 00:50:51.822 | INFO     | request_id - f21fc0f4-c299-453f-afcc-e46efabb7603 | app.agent.nodes.extract_keywords:extract_keywords:47 - 抽取关键词：['test']
+2026-07-09 00:50:54.434 | INFO     | request_id - f21fc0f4-c299-453f-afcc-e46efabb7603 | app.agent.nodes.recall_value:recall_value:62 - 检索到字段取值：[]
+2026-07-09 00:50:54.806 | INFO     | request_id - f21fc0f4-c299-453f-afcc-e46efabb7603 | app.agent.nodes.recall_metric:recall_metric:65 - 检索到指标信息：[]
+2026-07-09 00:50:57.074 | INFO     | request_id - f21fc0f4-c299-453f-afcc-e46efabb7603 | app.agent.nodes.merge_retrieved_info:merge_retrieved_info:142 - 合并后的表信息：[]
+2026-07-09 00:50:57.074 | INFO     | request_id - f21fc0f4-c299-453f-afcc-e46efabb7603 | app.agent.nodes.merge_retrieved_info:merge_retrieved_info:145 - 合并后的指标信息：[]
+2026-07-09 00:50:58.342 | INFO     | request_id - f21fc0f4-c299-453f-afcc-e46efabb7603 | app.agent.nodes.filter_table:filter_table:61 - 过滤后的表信息：[]
+2026-07-09 00:50:59.637 | INFO     | request_id - f21fc0f4-c299-453f-afcc-e46efabb7603 | app.agent.nodes.filter_metric:filter_metric:56 - 过滤后的指标信息：[]
+2026-07-09 00:50:59.674 | INFO     | request_id - f21fc0f4-c299-453f-afcc-e46efabb7603 | app.agent.nodes.add_extra_context:add_extra_context:37 - 数据库信息：{'dialect': 'mysql', 'version': '8.0.46'}
+2026-07-09 00:50:59.674 | INFO     | request_id - f21fc0f4-c299-453f-afcc-e46efabb7603 | app.agent.nodes.add_extra_context:add_extra_context:38 - 日期信息：{'date': '2026-07-09', 'weekday': 'Thursday', 'quarter': 'Q3'}
+2026-07-09 00:51:02.086 | INFO     | request_id - f21fc0f4-c299-453f-afcc-e46efabb7603 | app.agent.nodes.generate_sql:generate_sql:63 - 生成的SQL：SELECT 1 AS test;
+2026-07-09 00:51:02.091 | INFO     | request_id - f21fc0f4-c299-453f-afcc-e46efabb7603 | app.agent.nodes.validate_sql:validate_sql:35 - SQL语法正确
+2026-07-09 00:51:02.094 | INFO     | request_id - f21fc0f4-c299-453f-afcc-e46efabb7603 | app.agent.nodes.run_sql:run_sql:29 - SQL执行结果：[{'test': 1}]
