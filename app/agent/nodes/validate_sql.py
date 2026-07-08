@@ -18,7 +18,7 @@ async def validate_sql(state: DataAgentState, runtime: Runtime[DataAgentContext]
     """校验 SQL，并返回 error 字段控制后续条件分支"""
 
     writer = runtime.stream_writer
-    step = "校验 SQL"
+    step = "校验SQL"
     writer({"type": "progress", "step": step, "status": "running"})
 
     try:

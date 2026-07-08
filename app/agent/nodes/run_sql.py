@@ -16,7 +16,7 @@ async def run_sql(state: DataAgentState, runtime: Runtime[DataAgentContext]):
     """执行 SQL 并产出最终问数结果"""
 
     writer = runtime.stream_writer
-    step = "执行 SQL"
+    step = "执行SQL"
     writer({"type": "progress", "step": step, "status": "running"})
 
     try:

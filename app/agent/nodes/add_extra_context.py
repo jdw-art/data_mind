@@ -18,7 +18,7 @@ async def add_extra_context(state: DataAgentState, runtime: Runtime[DataAgentCon
     """补齐生成 SQL 所需的上下文信息"""
 
     writer = runtime.stream_writer
-    step = "添加额外上下文"
+    step = "增加额外上下文"
     writer({"type": "progress", "step": step, "status": "running"})
 
     try:

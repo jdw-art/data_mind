@@ -21,7 +21,7 @@ async def generate_sql(state: DataAgentState, runtime: Runtime[DataAgentContext]
     """基于已检索和过滤的上下文生成 SQL"""
 
     writer = runtime.stream_writer
-    step = "生成 SQL"
+    step = "生成SQL"
     writer({"type": "progress", "step": step, "status": "running"})
 
     try:
