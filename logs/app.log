@@ -26,3 +26,19 @@
 2026-07-08 23:16:39.013 | INFO     | request_id - 1 | app.agent.nodes.filter_table:filter_table:61 - 过滤后的表信息：['fact_order', 'dim_region']
 2026-07-08 23:16:39.037 | INFO     | request_id - 1 | app.agent.nodes.add_extra_context:add_extra_context:37 - 数据库信息：{'dialect': 'mysql', 'version': '8.0.46'}
 2026-07-08 23:16:39.037 | INFO     | request_id - 1 | app.agent.nodes.add_extra_context:add_extra_context:38 - 日期信息：{'date': '2026-07-08', 'weekday': 'Wednesday', 'quarter': 'Q3'}
+2026-07-08 23:41:09.677 | INFO     | request_id - 1 | app.agent.nodes.extract_keywords:extract_keywords:47 - 抽取关键词：['统计华北地区的销售总额', '统计', '销售总额', '华北地区']
+2026-07-08 23:41:13.242 | INFO     | request_id - 1 | app.agent.nodes.recall_value:recall_value:62 - 检索到字段取值：['dim_region.region_name.华北']
+2026-07-08 23:41:13.896 | INFO     | request_id - 1 | app.agent.nodes.recall_metric:recall_metric:65 - 检索到指标信息：['GMV', 'AOV']
+2026-07-08 23:41:13.969 | INFO     | request_id - 1 | app.agent.nodes.merge_retrieved_info:merge_retrieved_info:142 - 合并后的表信息：['fact_order', 'dim_region', 'dim_date']
+2026-07-08 23:41:13.969 | INFO     | request_id - 1 | app.agent.nodes.merge_retrieved_info:merge_retrieved_info:145 - 合并后的指标信息：['GMV', 'AOV']
+2026-07-08 23:41:16.314 | INFO     | request_id - 1 | app.agent.nodes.filter_metric:filter_metric:56 - 过滤后的指标信息：['GMV']
+2026-07-08 23:41:16.503 | INFO     | request_id - 1 | app.agent.nodes.filter_table:filter_table:61 - 过滤后的表信息：['fact_order', 'dim_region']
+2026-07-08 23:41:16.518 | INFO     | request_id - 1 | app.agent.nodes.add_extra_context:add_extra_context:37 - 数据库信息：{'dialect': 'mysql', 'version': '8.0.46'}
+2026-07-08 23:41:16.518 | INFO     | request_id - 1 | app.agent.nodes.add_extra_context:add_extra_context:38 - 日期信息：{'date': '2026-07-08', 'weekday': 'Wednesday', 'quarter': 'Q3'}
+2026-07-08 23:41:19.909 | INFO     | request_id - 1 | app.agent.nodes.generate_sql:generate_sql:63 - 生成的SQL：SELECT SUM(f.order_amount) AS 销售总额
+FROM fact_order AS f
+INNER JOIN dim_region AS r
+  ON f.region_id = r.region_id
+WHERE r.region_name = '华北';
+2026-07-08 23:41:19.941 | INFO     | request_id - 1 | app.agent.nodes.validate_sql:validate_sql:35 - SQL语法正确
+2026-07-08 23:41:19.946 | INFO     | request_id - 1 | app.agent.nodes.run_sql:run_sql:29 - SQL执行结果：[{'销售总额': 41099.5}]

@@ -73,4 +73,6 @@ class DataAgentState(TypedDict):
     date_info: DateInfoState  # 当前日期 星期和季度信息
     db_info: DBInfoState  # 数据库方言和版本信息
 
-    error: str  # 校验SQL时出现的错误信息复制错误已复制
+    sql: str  # 生成的 SQL 语句
+
+    error: str  # 校验SQL时出现的错误信息
