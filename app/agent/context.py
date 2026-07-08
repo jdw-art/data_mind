@@ -31,3 +31,5 @@ class DataAgentContext(TypedDict):
     value_es_repository: ValueESRepository
     # 元数据库仓储，合并阶段用它按 id 补齐字段、表、主外键信息
     meta_mysql_repository: MetaMySQLRepository
+    # 数仓仓储，负责在额外上下文不全时读取数据库方言、版本等执行环境信息
+    dw_mysql_repository: DWMySQLRepository
