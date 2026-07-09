@@ -334,3 +334,36 @@ GROUP BY c.member_level
 ORDER BY c.member_level;
 2026-07-09 01:46:56.959 | INFO     | request_id - 836f1fa2-91fe-4bee-86a7-ba3b0638c9ab | app.agent.nodes.validate_sql:validate_sql:35 - SQL语法正确
 2026-07-09 01:46:56.962 | INFO     | request_id - 836f1fa2-91fe-4bee-86a7-ba3b0638c9ab | app.agent.nodes.run_sql:run_sql:29 - SQL执行结果：[{'会员等级': '白银', '订单数': 30, '销售额': 71094.0}, {'会员等级': '铂金', '订单数': 25, '销售额': 57679.0}, {'会员等级': '青铜', '订单数': 26, '销售额': 50208.0}, {'会员等级': '黄金', '订单数': 34, '销售额': 100178.5}]
+2026-07-09 21:58:25.982 | INFO     | request_id - 3b177f73-46b8-49bf-bddf-b8d19f93b790 | app.agent.nodes.extract_keywords:extract_keywords:50 - 抽取关键词成功: ['大区', '统计', 'GMV', '排序', '统计 2025 年第一季度各大区的 GMV，并按 GMV 从高到低排序', '第一季度']
+2026-07-09 21:58:29.381 | INFO     | request_id - 3b177f73-46b8-49bf-bddf-b8d19f93b790 | app.agent.nodes.recall_value:recall_value:62 - 检索到字段取值：[]
+2026-07-09 21:58:30.438 | INFO     | request_id - 3b177f73-46b8-49bf-bddf-b8d19f93b790 | app.agent.nodes.recall_metric:recall_metric:65 - 检索到指标信息：['GMV']
+2026-07-09 21:58:31.934 | INFO     | request_id - 3b177f73-46b8-49bf-bddf-b8d19f93b790 | app.agent.nodes.merge_retrieved_info:merge_retrieved_info:142 - 合并后的表信息：['dim_region', 'fact_order', 'dim_product', 'dim_date']
+2026-07-09 21:58:31.934 | INFO     | request_id - 3b177f73-46b8-49bf-bddf-b8d19f93b790 | app.agent.nodes.merge_retrieved_info:merge_retrieved_info:145 - 合并后的指标信息：['GMV']
+2026-07-09 21:58:34.649 | INFO     | request_id - 3b177f73-46b8-49bf-bddf-b8d19f93b790 | app.agent.nodes.filter_metric:filter_metric:56 - 过滤后的指标信息：['GMV']
+2026-07-09 21:58:35.688 | INFO     | request_id - 3b177f73-46b8-49bf-bddf-b8d19f93b790 | app.agent.nodes.filter_table:filter_table:61 - 过滤后的表信息：['dim_region', 'fact_order', 'dim_date']
+2026-07-09 21:58:35.699 | INFO     | request_id - 3b177f73-46b8-49bf-bddf-b8d19f93b790 | app.agent.nodes.add_extra_context:add_extra_context:37 - 数据库信息：{'dialect': 'mysql', 'version': '8.0.46'}
+2026-07-09 21:58:35.699 | INFO     | request_id - 3b177f73-46b8-49bf-bddf-b8d19f93b790 | app.agent.nodes.add_extra_context:add_extra_context:38 - 日期信息：{'date': '2026-07-09', 'weekday': 'Thursday', 'quarter': 'Q3'}
+2026-07-09 21:58:39.584 | INFO     | request_id - 3b177f73-46b8-49bf-bddf-b8d19f93b790 | app.agent.nodes.generate_sql:generate_sql:63 - 生成的SQL：SELECT r.region_name AS 大区, SUM(f.order_amount) AS GMV
+FROM fact_order AS f
+JOIN dim_region AS r
+  ON f.region_id = r.region_id
+JOIN dim_date AS d
+  ON f.date_id = d.date_id
+WHERE d.quarter = 'Q1'
+  AND f.date_id BETWEEN 20250101 AND 20250331
+GROUP BY r.region_name
+ORDER BY GMV DESC;
+2026-07-09 21:58:39.607 | INFO     | request_id - 3b177f73-46b8-49bf-bddf-b8d19f93b790 | app.agent.nodes.validate_sql:validate_sql:35 - SQL语法正确
+2026-07-09 21:58:39.615 | INFO     | request_id - 3b177f73-46b8-49bf-bddf-b8d19f93b790 | app.agent.nodes.run_sql:run_sql:29 - SQL执行结果：[{'大区': '华东', 'GMV': 107373.0}, {'大区': '华南', 'GMV': 70202.0}, {'大区': '华北', 'GMV': 41099.5}, {'大区': '西南', 'GMV': 31528.0}, {'大区': '华中', 'GMV': 28957.0}]
+2026-07-09 22:41:04.356 | INFO     | request_id - c7273905-cf04-4aa7-9f3a-a068be7281cb | app.agent.nodes.extract_keywords:extract_keywords:50 - 抽取关键词成功: ['事情', '处理', '除了问数，你还能处理其他事情吗', '问数']
+2026-07-09 22:41:07.791 | INFO     | request_id - c7273905-cf04-4aa7-9f3a-a068be7281cb | app.agent.nodes.recall_metric:recall_metric:65 - 检索到指标信息：[]
+2026-07-09 22:41:10.331 | INFO     | request_id - c7273905-cf04-4aa7-9f3a-a068be7281cb | app.agent.nodes.recall_value:recall_value:62 - 检索到字段取值：[]
+2026-07-09 22:41:10.349 | INFO     | request_id - c7273905-cf04-4aa7-9f3a-a068be7281cb | app.agent.nodes.merge_retrieved_info:merge_retrieved_info:142 - 合并后的表信息：['fact_order', 'dim_region', 'dim_date']
+2026-07-09 22:41:10.349 | INFO     | request_id - c7273905-cf04-4aa7-9f3a-a068be7281cb | app.agent.nodes.merge_retrieved_info:merge_retrieved_info:145 - 合并后的指标信息：[]
+2026-07-09 22:41:11.767 | INFO     | request_id - c7273905-cf04-4aa7-9f3a-a068be7281cb | app.agent.nodes.filter_table:filter_table:61 - 过滤后的表信息：[]
+2026-07-09 22:41:12.414 | INFO     | request_id - c7273905-cf04-4aa7-9f3a-a068be7281cb | app.agent.nodes.filter_metric:filter_metric:56 - 过滤后的指标信息：[]
+2026-07-09 22:41:12.423 | INFO     | request_id - c7273905-cf04-4aa7-9f3a-a068be7281cb | app.agent.nodes.add_extra_context:add_extra_context:37 - 数据库信息：{'dialect': 'mysql', 'version': '8.0.46'}
+2026-07-09 22:41:12.423 | INFO     | request_id - c7273905-cf04-4aa7-9f3a-a068be7281cb | app.agent.nodes.add_extra_context:add_extra_context:38 - 日期信息：{'date': '2026-07-09', 'weekday': 'Thursday', 'quarter': 'Q3'}
+2026-07-09 22:41:15.354 | INFO     | request_id - c7273905-cf04-4aa7-9f3a-a068be7281cb | app.agent.nodes.generate_sql:generate_sql:63 - 生成的SQL：SELECT '当前仅支持将自然语言查询转换为 SQL；由于未提供可用数据表，无法处理“除了问数，你还能处理其他事情吗”这类非查询请求。' AS 提示;
+2026-07-09 22:41:15.360 | INFO     | request_id - c7273905-cf04-4aa7-9f3a-a068be7281cb | app.agent.nodes.validate_sql:validate_sql:35 - SQL语法正确
+2026-07-09 22:41:15.361 | INFO     | request_id - c7273905-cf04-4aa7-9f3a-a068be7281cb | app.agent.nodes.run_sql:run_sql:29 - SQL执行结果：[{'提示': '当前仅支持将自然语言查询转换为 SQL；由于未提供可用数据表，无法处理“除了问数，你还能处理其他事情吗”这类非查询请求。'}]
